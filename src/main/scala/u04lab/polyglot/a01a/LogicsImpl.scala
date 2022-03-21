@@ -27,9 +27,3 @@ class LogicsImpl(private val size: Int, private val boat: Int) extends Logics:
       row == boardRawStart && col >= boardColStart && col < (boardColStart + boat)
     else
       col == boardColStart && row >= boardRawStart && row < (boardRawStart + boat)
-
-/*
-println("Boat row --> " + boardRawStart)
-println("Boat column --> " + boardColStart)
-println(if vertOrHoriz == 0 then "Horizzontal" else "Vertical")
-*/
