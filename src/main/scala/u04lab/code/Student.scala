@@ -19,6 +19,17 @@ object Student:
 object Course:
   def apply(name: String, teacher: String): Course = ???
 
+case class CourseImpl(override val name: String, override val teacher: String) extends Course
+
+case class StudentImpl(override val name: String, override val year: Int) extends Student:
+
+  private val list: List[Course] = Nil()
+  override def enrolling(course: Course): Unit = append(list, Cons(course, Nil()))
+  override def courses: List[String] = list match
+    case Cons(h, t) => Cons(h, )
+    case Nil() => 
+  override def hasTeacher(teacher: String): Boolean = ???
+
 @main def checkStudents(): Unit =
   val cPPS = Course("PPS", "Viroli")
   val cPCD = Course("PCD", "Ricci")
