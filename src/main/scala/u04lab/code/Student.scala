@@ -5,7 +5,7 @@ import List.*
 trait Student:
   def name: String
   def year: Int
-  def enrolling(course: Course): Unit // the student participates to a Course
+  def enrolling(course: Course*): Unit // the student participates to a Course
   def courses: List[String] // names of course the student participates to
   def hasTeacher(teacher: String): Boolean // is the student participating to a course of this teacher?
 
@@ -14,21 +14,21 @@ trait Course:
   def teacher: String
 
 object Student:
-  def apply(name: String, year: Int = 2017): Student = ???
+  def apply(name: String, year: Int = 2017): Student = StudentImpl(name, year)
 
 object Course:
-  def apply(name: String, teacher: String): Course = ???
+  def apply(name: String, teacher: String): Course = CourseImpl(name, teacher)
 
 case class CourseImpl(override val name: String, override val teacher: String) extends Course
 
 case class StudentImpl(override val name: String, override val year: Int) extends Student:
 
-  private val list: List[Course] = Nil()
-  override def enrolling(course: Course): Unit = append(list, Cons(course, Nil()))
-  override def courses: List[String] = list match
-    case Cons(h, t) => Cons(h, )
-    case Nil() => 
-  override def hasTeacher(teacher: String): Boolean = ???
+  private var list: List[Course] = Nil()
+  //override def enrolling(course: Course): Unit = list = append(Cons(course, Nil()), list)
+  override def enrolling(course: Course*): Unit = course foreach (e => list = append(Cons(e, Nil()), list))
+  override def courses: List[String] = map(list)( (x: Course) => x.name)
+  //override def courses: List[String] = flatMap(list)({ case CourseImpl(name, _) => Cons(name, Nil()); case _ => Nil() })
+  override def hasTeacher(teacher: String): Boolean = contains(map(list)((x: Course) => x.teacher), teacher)
 
 @main def checkStudents(): Unit =
   val cPPS = Course("PPS", "Viroli")
