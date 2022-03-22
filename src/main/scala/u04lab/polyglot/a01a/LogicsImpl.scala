@@ -15,14 +15,14 @@ class LogicsImpl(private val size: Int, private val boat: Int) extends Logics:
 
   def hit(row: Int, col: Int) =
       if checkCollision(row, col) then
-        this.contHit = this.contHit + 1
-        if this.contHit == boat then Result.WON else Result.HIT
+        contHit = contHit + 1
+        if contHit == boat then Result.WON else Result.HIT
       else
-        this.contMiss = this.contMiss + 1
-        if this.contMiss == FAILURES then Result.LOST else Result.MISS
+        contMiss = contMiss + 1
+        if contMiss == FAILURES then Result.LOST else Result.MISS
 
   def checkCollision(row: Int, col: Int): Boolean =
-    if this.vertOrHoriz == 0 then
+    if vertOrHoriz == 0 then
       row == boardRawStart && col >= boardColStart && col < (boardColStart + boat)
     else
       col == boardColStart && row >= boardRawStart && row < (boardRawStart + boat)
