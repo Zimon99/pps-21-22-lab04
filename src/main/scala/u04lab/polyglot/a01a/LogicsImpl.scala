@@ -6,7 +6,6 @@ import scala.util.Random
 class LogicsImpl(private val size: Int, private val boat: Int) extends Logics:
 
   private val random = Random ()
-  private val randomWithSeed = Random (42)
   private val vertOrHoriz: Int = random.nextInt(2) // Horizontal = 0 ! Vertical = 1
   private val boardColStart: Int = random.nextInt(if vertOrHoriz == 0 then size - boat else size)
   private val boardRawStart: Int = random.nextInt(if vertOrHoriz == 0 then size else size - boat)
