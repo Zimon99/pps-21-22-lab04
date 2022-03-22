@@ -7,7 +7,7 @@ import u04lab.code.List
 import u04lab.code.List.*
 import scala.util.Random
 
-/** solution and descriptions at https://bitbucket.org/mviroli/oop2019-esami/src/master/a01b/sol2/ */
+/** solution and descriptions at https://bitbucket.org/mviroli/oop2019-esami/src/master/a05b/sol2/ */
 class LogicsImpl(private val size: Int, private val mines: Int) extends Logics:
 
   // Logics of this implement
@@ -21,9 +21,9 @@ class LogicsImpl(private val size: Int, private val mines: Int) extends Logics:
   private var minesPos: List[Int] = Nil()
   private var contNiceShot: Int = 0
 
-  randomizeMines()
-
-  //println(minesPos)
+  while (length(minesPos) != mines)
+    if !contains(minesPos, random.nextInt(size * size)) then
+      minesPos = append(minesPos, Cons(random.nextInt(size * size), Nil()))
 
   def hit(x: Int, y: Int): java.util.Optional[Integer] =
     if !contains(minesPos, y * size + x) then
@@ -33,8 +33,3 @@ class LogicsImpl(private val size: Int, private val mines: Int) extends Logics:
       OptionToOptional(None()) // Lose
 
   def won = contNiceShot == (size * size - mines)
-
-  private def randomizeMines(): Unit =
-    while (length(minesPos) != mines)
-      if !contains(minesPos, random.nextInt(size * size)) then
-        minesPos = append(minesPos, Cons(random.nextInt(size * size), Nil()))
