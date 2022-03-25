@@ -6,9 +6,9 @@ import scala.util.Random
 class LogicsImpl(private val size: Int, private val boat: Int) extends Logics:
 
   private val random = Random ()
-  private val vertOrHoriz: Int = random.nextInt(2) // Horizontal = 0 ! Vertical = 1
-  private val boardColStart: Int = random.nextInt(if vertOrHoriz == 0 then size - boat else size)
-  private val boardRawStart: Int = random.nextInt(if vertOrHoriz == 0 then size else size - boat)
+  private val isHorizontal: Boolean = random.nextBoolean() // Horizontal = true ! Vertical = false
+  private val boardColStart: Int = random.nextInt(if isHorizontal then size - boat else size)
+  private val boardRawStart: Int = random.nextInt(if isHorizontal then size else size - boat)
   private val FAILURES: Int = 5
   private var contHit: Int = 0
   private var contMiss: Int = 0
@@ -22,7 +22,7 @@ class LogicsImpl(private val size: Int, private val boat: Int) extends Logics:
         if contMiss == FAILURES then Result.LOST else Result.MISS
 
   def checkCollision(row: Int, col: Int): Boolean =
-    if vertOrHoriz == 0 then
+    if isHorizontal then
       row == boardRawStart && col >= boardColStart && col < (boardColStart + boat)
     else
       col == boardColStart && row >= boardRawStart && row < (boardRawStart + boat)

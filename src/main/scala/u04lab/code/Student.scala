@@ -47,6 +47,9 @@ case class StudentImpl(override val name: String, override val year: Int) extend
     (s1.courses, s2.courses, s3.courses)
   ) // (Cons(PCD,Cons(PPS,Nil())),Cons(PPS,Nil()),Cons(SDR,Cons(PCD,Cons(PPS,Nil()))))
   println(s1.hasTeacher("Ricci")) // true
+  println("------")
+  val k = factoryList(1,2,3)
+  println(k)
 
 /** Hints:
   *   - simply implement Course, e.g. with a case class
