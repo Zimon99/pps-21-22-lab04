@@ -23,11 +23,15 @@ case class CourseImpl(override val name: String, override val teacher: String) e
 
 case class StudentImpl(override val name: String, override val year: Int) extends Student:
 
+  import Option.*
   private var list: List[Course] = Nil()
+
   //override def enrolling(course: Course): Unit = list = append(Cons(course, Nil()), list)
   override def enrolling(course: Course*): Unit = course foreach (e => list = append(Cons(e, Nil()), list))
+
   override def courses: List[String] = map(list)( (x: Course) => x.name)
   //override def courses: List[String] = flatMap(list)({ case CourseImpl(name, _) => Cons(name, Nil()); case _ => Nil() })
+
   override def hasTeacher(teacher: String): Boolean = contains(map(list)((x: Course) => x.teacher), teacher)
 
 @main def checkStudents(): Unit =
@@ -48,8 +52,10 @@ case class StudentImpl(override val name: String, override val year: Int) extend
   ) // (Cons(PCD,Cons(PPS,Nil())),Cons(PPS,Nil()),Cons(SDR,Cons(PCD,Cons(PPS,Nil()))))
   println(s1.hasTeacher("Ricci")) // true
   println("------")
+
+  // Testing factoryList
   val k = factoryList(1,2,3)
-  println(k)
+  println(k) // Cons(1, Cons(2, Cons(3, Nil())))
 
 /** Hints:
   *   - simply implement Course, e.g. with a case class

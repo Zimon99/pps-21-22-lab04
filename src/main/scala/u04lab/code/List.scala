@@ -65,5 +65,5 @@ object List:
     var l: List[A] = Nil()
     elem foreach(e => l = append(l, Cons(e, Nil())))
     l
-  
+
 end List
